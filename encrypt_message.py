@@ -14,12 +14,40 @@ import string
 # TODO-4: What happens if you try to shift z forwards by 9? 
 # Can you fix the code?
 
+
+
 alphabets = list(string.ascii_lowercase)
 
 def encrypt(original_text, shift_amount):
     output_text = ""
 
-    print(f"Here is the encoded result: {output_text}")
+    for letter in original_text:
+        if letter in alphabets:
+            original_position = alphabets.index(letter)
+            new_position = (original_position + shift_amount) % len(alphabets)
+
+            output_text = output_text + alphabets[new_position]
+        else:
+            output_text = output_text + letter
+    return output_text
+
+
+def decrypt(original_text, shift_amount):
+    output_text = ""
+
+    for letter in original_text:
+        if letter in alphabets:
+            original_position = alphabets.index(letter)
+            new_position = (original_position - shift_amount) % len(alphabets)
+
+            output_text = output_text + alphabets[new_position]
+        else:
+            output_text = output_text + letter
+    return output_text
+
+
+print(decrypt("jgnnq yqtnf", 2))
+
 
 text = input("Type your message:\n").lower()
 shift = int(input("Type the shift number:\n"))
